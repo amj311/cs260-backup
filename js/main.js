@@ -1,3 +1,6 @@
-(function (window, document) {
+function log(msg){
+	document.getElementById('msg').innerHTML += '<div>'+msg+'<br>';
+}
 
-})(window, document);
+log("hello world")
+log("hello world")
