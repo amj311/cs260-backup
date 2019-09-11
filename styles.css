@@ -1,0 +1,7 @@
+#msgs {
+	padding: 10px;
+	background: #dddddd;
+	max-height: 10.2em;
+	overflow-y: auto;
+}
+.msg.err { color: red; }
