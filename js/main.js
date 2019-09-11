@@ -15,11 +15,10 @@ function log(msg, type){
 
 
 
-class DateTime {
-	constructor(initDate)
-	{
-		this.date()
-	}
+class Event {
+	constructor(){}
+	start;
+	end;
 }
 
 
