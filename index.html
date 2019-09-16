@@ -5,22 +5,30 @@
     <meta name="google-site-verification" content="MIgfin-t5OT5Bfy1FEwi2nmFNXvS-8WWKEpBKuggZ6A" />
     <title>A+ Scheduler</title>
     <link rel="stylesheet" href="styles.css">
+    <script
+  src="https://code.jquery.com/jquery-3.4.1.min.js"
+  integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+  crossorigin="anonymous"></script>
 </head>
 <body>
     <h1>A+ Scheduler</h1>
 
 
     <div id="calendar">
-        <div class="gutter"></div>
+        <div class="bglines"></div>
         <div class="grid">
-            <div class="bglines"></div>    
-            <div class="events"></div>
+        <div class="gutter"></div>
+        <div class="events">
+            <div class="event main" style="top:163px">Go to class</div>
+            <div class="event google sub" style="top:150px">Go to class</div>
         </div>
+    </div>
     </div>
 
     <button onclick="log('new message')">Log Message</button>
     <div id="msgs"></div>
 </body>
+
 <script src="db/userdata.js"></script>
 <script src="js/main.js"></script>
 </html>
