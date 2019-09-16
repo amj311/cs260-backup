@@ -9,7 +9,33 @@ function log(msg, type){
 }
 
 
+function fillCalGrid()
+{
+	for (let i = 0; i < (24*4); i++)
+	{
+		let hr = Math.floor(i/4);
+		let min;
+		className="min";
+		
+		switch (i%4){
+			case 0:
+				min = "00"
+				className = "hr";
+				break;
+			case 1:
+				min = "15";
+				break;
+			case 2:
+				min = "30";
+				break;
+			case 3:
+				min = "45";
+				break;
+		}
+		document.getElementsByClassName("bglines")[0].innerHTML += `<div class="sched-box ${className}">${hr}:${min}</div>`;
 
+	}
+}
 
 /********************************************* */
 
@@ -28,3 +54,4 @@ class Event {
 
 
 log(`Started app with ${userData.name}`, "err")
+fillCalGrid();
