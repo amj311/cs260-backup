@@ -15,8 +15,15 @@
 	position: relative;
 }
 #calendar * { box-sizing: border-box; }
+div#nowMarker {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    width: 100%;
+    border-top: 2px solid red;
+}
 .sched-box {
-	height: 1em;
+	height: 1rem; /* CANNOT BE EM - because .min are have .8 em font and js calculation of time will be off. */ 
 	box-sizing: border-box;
 }
 .sched-box .timestamp {

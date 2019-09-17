@@ -34,10 +34,26 @@ function fillCalGrid()
 				break;
 		}
 		document.getElementsByClassName("bglines")[0].innerHTML += `<div class="sched-box ${className}"><div class="timestamp">${hr}:${min}</div></div>`;
-
 	}
+	$('.bglines')[0].innerHTML += `<div id="nowMarker"></div>`;
+	posNowmarker();
 }
-function setCalScroll(){
+
+function posNowmarker(){
+	
+	let unit_15Min = $('.sched-box')[0].offsetHeight;
+	let unit_Min = unit_15Min / 15;
+	let unit_Hr = unit_15Min * 4;
+
+	let dateTime = new Date();
+	let markerTop = `${(dateTime.getHours()*unit_Hr) + (dateTime.getMinutes()*unit_Min)}px`;
+
+	console.log(dateTime.getHours()*unit_Hr, dateTime.getMinutes()*unit_Min, markerTop);
+
+	$($('#nowMarker')[0]).css('top', `${(dateTime.getHours()*unit_Hr) + (dateTime.getMinutes()*unit_Min)}px`);
+}
+
+function posCalFirstEvent(){
 	
 	let eventMap = Array.from(document.getElementsByClassName('main')).map(function (event) {
 		return Number($(event).css('top').slice(0,-2))
@@ -66,4 +82,5 @@ class Event {
 
 log(`Started app with ${userData.name}`, "err")
 fillCalGrid();
-setCalScroll();
+posCalFirstEvent();
+window.setInterval(posNowmarker, 1000*60)
