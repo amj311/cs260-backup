@@ -46,7 +46,7 @@
 	top: 0;
 	left: 0;
 	display:grid;
-	grid-template-columns: 40px 1fr;
+	grid-template-columns: 3em 1fr;
 }
 .events {
 	width:100%;

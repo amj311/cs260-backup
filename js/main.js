@@ -13,7 +13,8 @@ function fillCalGrid()
 {
 	for (let i = 0; i < (24*4); i++)
 	{
-		let hr = Math.floor(i/4)
+		let hr24 = Math.floor(i/4);
+		let hr = (hr24%12 > 0) ? hr24%12 : "12";
 		let min;
 		className="min";
 		
@@ -32,7 +33,7 @@ function fillCalGrid()
 				min = "45";
 				break;
 		}
-		document.getElementsByClassName("bglines")[0].innerHTML += `<div class="sched-box ${className}"><div class="timestamp">${hr%12}:${min}</div></div>`;
+		document.getElementsByClassName("bglines")[0].innerHTML += `<div class="sched-box ${className}"><div class="timestamp">${hr}:${min}</div></div>`;
 
 	}
 }
