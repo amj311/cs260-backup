@@ -86,14 +86,14 @@ pre.appendChild(textContent);
 }
 
 
-function listUpcomingEvents(){
+function listUserCalendars(){
     var calendars;
     gapi.client.calendar.calendarList.list()
     .then( function(response){
         calendars = response.result.items;
     
         for (let i = 0; i < calendars.length; i++){
-            console.log(calendars[i].summary)
+            log(calendars[i].summary)
         }
     })
 }
