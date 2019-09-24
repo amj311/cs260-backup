@@ -86,7 +86,17 @@ pre.appendChild(textContent);
 }
 
 
-
+function listUpcomingEvents(){
+    var calendars;
+    gapi.client.calendar.calendarList.list()
+    .then( function(response){
+        calendars = response.result.items;
+    
+        for (let i = 0; i < calendars.length; i++){
+            console.log(calendars[i].summary)
+        }
+    })
+}
 
 /**
  * Print the summary and start datetime/date of the next ten events in
