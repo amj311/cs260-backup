@@ -11,6 +11,9 @@ var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
+var listCalButton = document.getElementById('list_cal_button');
+var listEventButton = document.getElementById('list_event_button');
+var userButtonSpan = document.getElementById('user_buttons');
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -35,8 +38,12 @@ gapi.client.init({
 
     // Handle the initial sign-in state.
     updateSigninStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
+
+    // assign button tasks
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
+    listCalButton.onclick = listUserCalendars;
+    listEventButton.onclick = listUpcomingEvents;
 }, function(error) {
     appendPre(JSON.stringify(error, null, 2));
 });
@@ -50,9 +57,10 @@ function updateSigninStatus(isSignedIn) {
 if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
-    listUpcomingEvents();
+    userButtonSpan.style.display = 'block';
 } else {
     authorizeButton.style.display = 'block';
+    userButtonSpan.style.display = 'none';
     signoutButton.style.display = 'none';
 }
 }
