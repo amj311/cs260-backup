@@ -83,6 +83,8 @@ function appendPre(message) {
 var pre = document.getElementById('content');
 var textContent = document.createTextNode(message + '\n');
 pre.appendChild(textContent);
+
+log('',message);
 }
 
 
@@ -93,7 +95,7 @@ function listUserCalendars(){
         calendars = response.result.items;
     
         for (let i = 0; i < calendars.length; i++){
-            log(calendars[i].summary)
+            console.log(calendars[i].summary)
         }
     })
 }
@@ -108,7 +110,7 @@ function listUpcomingEvents() {
 let calendars = gapi.client.items;
 console.log(calendars);
 
-/*
+
 gapi.client.calendar.events.list({
     'calendarId': 'primary',
     'timeMin': (new Date()).toISOString(),
@@ -133,5 +135,5 @@ gapi.client.calendar.events.list({
     } else {
     appendPre('No upcoming events found.');
     }
-});*/
+});
 }
