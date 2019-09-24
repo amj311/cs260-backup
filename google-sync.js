@@ -95,7 +95,7 @@ pre.appendChild(textContent);
  */
 function listUpcomingEvents() {
 
-let calendars = gapi.client.calendar.list.getItems();
+let calendars = gapi.client.calendar.list.getItems;
 
 for (cal in calendars) {
     console.log(cal.summary);
