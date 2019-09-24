@@ -96,8 +96,12 @@ pre.appendChild(textContent);
 function listUpcomingEvents() {
 
 let calendars = gapi.client.calendar.list;
-console.log(calendars);
 
+for (cal in calendars) {
+    console.log(cal.summary);
+}
+
+/*
 gapi.client.calendar.events.list({
     'calendarId': 'primary',
     'timeMin': (new Date()).toISOString(),
@@ -122,5 +126,5 @@ gapi.client.calendar.events.list({
     } else {
     appendPre('No upcoming events found.');
     }
-});
+});*/
 }
