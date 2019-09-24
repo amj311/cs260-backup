@@ -1,10 +1,15 @@
-function log(msg, type){
+function log(type, ...msgs){
+	let logHTML = "";
 	const log = document.getElementById('msgs')
-	log.innerHTML += `<div class="msg ${type || ''}">
-											${msg} - 
-											<em>
-												${new Date().toISOString()}
-											</em></div>`;
+	
+	msgs.forEach(function(msg) {
+		logHTML +=	`<div class="msg-line">${msg}</div>`
+	} )
+	
+	log.innerHTML += `	<div class="msg ${type || ''}">
+							<div class="log-time">${new Date().toISOString()}</div>
+							${logHTML}
+						</div>`;
 	log.scrollTop = log.scrollHeight;
 }
 
