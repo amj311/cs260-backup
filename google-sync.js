@@ -11,9 +11,12 @@ var SCOPES = "https://www.googleapis.com/auth/calendar.readonly";
 
 var authorizeButton = document.getElementById('authorize_button');
 var signoutButton = document.getElementById('signout_button');
+var fetchCalButton = document.getElementById('fetch_cal_button');
 var listCalButton = document.getElementById('list_cal_button');
 var listEventButton = document.getElementById('list_event_button');
 var userButtonSpan = document.getElementById('user_buttons');
+
+var userCalendars = [];
 
 /**
  *  On load, called to load the auth2 library and API client library.
@@ -42,7 +45,7 @@ gapi.client.init({
     // assign button tasks
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
-    listCalButton.onclick = listUserCalendars;
+    fetchCalButton.onclick = fetchUserCalendars;
     listEventButton.onclick = listUpcomingEvents;
 }, function(error) {
     appendPre(JSON.stringify(error, null, 2));
@@ -96,7 +99,7 @@ log('',message);
 }
 
 
-function listUserCalendars(){
+function fetchUserCalendars(){
     var calendars;
     gapi.client.calendar.calendarList.list()
     .then( function(response){
