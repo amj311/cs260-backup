@@ -71,6 +71,8 @@ function handleSignoutClick(event) {
 gapi.auth2.getAuthInstance().signOut();
 }
 
+
+
 /**
  * Append a pre element to the body containing the given message
  * as its text node. Used to display the results of the API call.
@@ -83,12 +85,19 @@ var textContent = document.createTextNode(message + '\n');
 pre.appendChild(textContent);
 }
 
+
+
+
 /**
  * Print the summary and start datetime/date of the next ten events in
  * the authorized user's calendar. If no events are found an
  * appropriate message is printed.
  */
 function listUpcomingEvents() {
+
+let calendars = gapi.client.calendar.list();
+console.log(calendars);
+
 gapi.client.calendar.events.list({
     'calendarId': 'primary',
     'timeMin': (new Date()).toISOString(),
