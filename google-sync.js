@@ -16,6 +16,12 @@ var listCalButton = document.getElementById('list_cal_button');
 var listEventButton = document.getElementById('list_event_button');
 var userButtonSpan = document.getElementById('user_buttons');
 
+
+
+// FOR TESTING WITH DATA
+//userCalendars = JSON.parse(testcalJSON);
+
+
 var userCalendars = [];
 
 /**
@@ -48,6 +54,7 @@ gapi.client.init({
     fetchCalButton.onclick = fetchUserCalendars;
     listCalButton.onclick = listUserCalendars;
     listEventButton.onclick = listUpcomingEvents;
+
 }, function(error) {
     appendPre(JSON.stringify(error, null, 2));
 });
