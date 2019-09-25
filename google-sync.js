@@ -46,6 +46,7 @@ gapi.client.init({
     authorizeButton.onclick = handleAuthClick;
     signoutButton.onclick = handleSignoutClick;
     fetchCalButton.onclick = fetchUserCalendars;
+    listCalButton.onclick = listUserCalendars;
     listEventButton.onclick = listUpcomingEvents;
 }, function(error) {
     appendPre(JSON.stringify(error, null, 2));
@@ -61,6 +62,7 @@ if (isSignedIn) {
     authorizeButton.style.display = 'none';
     signoutButton.style.display = 'block';
     userButtonSpan.style.display = 'block';
+    fetchUserCalendars();
 } else {
     authorizeButton.style.display = 'block';
     userButtonSpan.style.display = 'none';
@@ -100,15 +102,17 @@ log('',message);
 
 
 function fetchUserCalendars(){
-    var calendars;
     gapi.client.calendar.calendarList.list()
     .then( function(response){
-        calendars = response.result.items;
-    
-        for (let i = 0; i < calendars.length; i++){
-            console.log(calendars[i].summary)
-        }
+        userCalendars = response.result.items;
+        listUserCalendars();
     })
+}
+
+function listUserCalendars(){
+    for (let i = 0; i < userCalendars.length; i++){
+        console.log(userCalendars[i].summary)
+    }
 }
 
 /**
