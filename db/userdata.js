@@ -1,4 +1,0 @@
-var userData = 
-{
-	"name":"Arthur"
-}
