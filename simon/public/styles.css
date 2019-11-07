@@ -1,0 +1,94 @@
+body {
+    margin: 0;
+}
+
+#game {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    background: #555;
+    overflow: hidden;
+}
+
+#game * {
+    box-sizing: border-box;
+}
+
+div#simon_space {
+    position: absolute;
+    height: 50%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div#simon {
+    position: relative;
+    width: 80%;
+    max-width: 30em;
+}
+
+div#screen {
+    position: absolute;
+    top: 8%;
+    left: 7%;
+    width: 72%;
+    height: 75%;
+    box-shadow: inset 0 0 3em 0em #ffffff;
+    background-image: url(images/static_fizzle.gif);
+}
+
+#screen.showColor {
+    background-image: none;
+    box-shadow: inset 0 0 50em, inset 100vw 0 #ffffffaa;
+}
+
+div#simon_height {
+    padding-top: 75%;
+}
+
+#simon img {
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: absolute;
+}
+
+div#userConsole {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    transform: translateX(-50%) perspective(100vh) rotateX(30deg);
+    transform-origin: bottom;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 100%;
+    max-width: 40em;
+    height: 80%;
+}
+
+.button {
+    flex-grow: 1;
+    width: 40%;
+    height: 20%;
+    margin: 3%;
+    border: .2em solid;
+    border-top-color: #ffffff66;
+    border-left-color: #ffffff33;
+    border-right-color: #00000033;
+    border-bottom-color: #00000066;
+    outline: 1px solid #00000055;
+    cursor: pointer;
+}
+
+.button:hover {
+    box-shadow: inset 100vw 0 #ffffff22;
+}
+
+.button:active {
+    border-width: .12em;
+    box-shadow: inset 0 0 6em, inset 500vw 0 #ffffffaa, 0 0 1.5em -0.2em, 0 0 1em -0.2em #ffffffbb;
+}
