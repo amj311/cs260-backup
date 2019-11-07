@@ -92,6 +92,7 @@ div#simon_height {
     top: 0;
     left: 0;
     position: absolute;
+    pointer-events: none;
 }
 
 div#ui_main {
@@ -146,4 +147,8 @@ div#userConsole, #menu {
     min-width: min-content;
     font-size: 1.5em;
     padding: 0.5em;
+}
+
+#userConsole:not(.playerTurn) {
+    pointer-events: none;
 }
