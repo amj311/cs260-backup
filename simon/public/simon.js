@@ -23,17 +23,19 @@ var game = new Vue ({
         simonSeqIdx: 0,
         ctDwn: 3,
         userAttempt: [],
+        round: 0,
         playingColors: [],
         simonColor: null,
         showSimonColor: false,
-        numColors: 8,
+        numColors: 5,
         simonSpeed: 1000,
         uiColors: {play: null, scores: null, submit: null, back: null},
         allColors: ["dodgerblue","lime","blueviolet","gold","red","darkorange","magenta", "aqua"]
     },
     
     async created() {
-        this.gameState = this.GAME_STATES[3]
+        this.simonMessage = this.gameName;
+        this.gameState = this.GAME_STATES[2]
         this.uiColors.play = this.randomFrom(this.allColors)
         this.uiColors.scores = this.randomFrom(this.allColors)
         this.uiColors.submit = this.randomFrom(this.allColors)
@@ -49,8 +51,6 @@ var game = new Vue ({
         let scores = await axios.get('/scores?max=25')
         console.log(scores.data)
         this.loading = false;
-        
-        this.startGame()
     },
     
     methods: {
@@ -63,51 +63,66 @@ var game = new Vue ({
         },
         
         startGame(){
+            this.gameState = this.GAME_STATES[3]
             this.playerTurn = false;
             this.simonSeq = []
+            this.round = 1;
             
             this.doSimonTurn()
         },
         
         doSimonTurn(){
             this.playerTurn = false;
-            this.simonSeq.push(this.randomIdxOf(this.playingColors))
+            this.simonSeq.push(this.randomFrom(this.playingColors))
             this.playSimonSeq( this.startUserTurn )
         },
         
         playSimonSeq(done) {
             if (game.ctDwn > 0){
-                game.ctDwn--
+                game.showSimonColor = false;
                 game.simonMessage = game.ctDwn
+                game.ctDwn--
                 setTimeout( game.playSimonSeq, game.simonSpeed )
             }
             
             else {
-                game.showSimonColor = true;
+                game.simonMessage = ""
                 
                 if(game.simonSeqIdx >= game.simonSeq.length){
+                    game.ctDwn = 3;
                     game.simonSeqIdx = 0;
                     afterPlaySeq()
                     return
                 }
-                game.simonColor = game.allColors[game.simonSeqIdx]
+                game.swapSimonColor(game.allColors[game.simonSeq[game.simonSeqIdx]])
                 game.simonSeqIdx++
                 setTimeout( game.playSimonSeq, game.simonSpeed )
             }
             
         },
         
+        swapSimonColor(colorString){
+            this.simonColor = "#000"
+            game.showSimonColor = true;
+            setTimeout( function(){ game.simonColor = colorString }, 50 )
+        },
+        
         startUserTurn(){
             this.showSimonColor = false;
             this.playerTurn = true;
+            this.userAttempt = [];
         },
         
         onUserAttempt(colorIdx){
-            this.playerTurn = false;
-            this.showSimonColor = true
-            this.simonColor = this.allColors[colorIdx]
+            let atmptIdx = this.userAttempt.length;
+            this.userAttempt.push(colorIdx)
+            console.log(this.simonSeq, this.userAttempt)
+            console.log(this.round, this.simonSeq.length)
             
-            setTimeout( this.doSimonTurn, 1000);
+            //this.playerTurn = false;
+            this.swapSimonColor(this.allColors[colorIdx])
+            
+            //setTimeout( this.doSimonTurn, 2000);
         }
         
         

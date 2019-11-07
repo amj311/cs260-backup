@@ -17,15 +17,15 @@
                         <div id="screen" :class="{showColor: showSimonColor}" :style="{backgroundColor: simonColor, color: simonColor}"></div>
                         <img src="images/738035_old-television-png.png" draggable="false">
                         <div id="screen_text" class="screen-vp">
-                            <div id="menu_screen" v-show="gameState === 'menu'">
-                                <div id="game_name">Clement Says</div>
+                            <div id="msg_screen">
+                                <div id="simon_msg">{{simonMessage}}</div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div id="ui_main">
                     <div v-show="gameState === 'menu'" id="menu">
-                        <div class="button" :style="{backgroundColor: uiColors.play, color: uiColors.play}">
+                        <div @click="startGame" class="button" :style="{backgroundColor: uiColors.play, color: uiColors.play}">
                             <div>Play</div>
                         </div>
                         <div class="button" :style="{backgroundColor: uiColors.scores, color: uiColors.scores}">
@@ -34,7 +34,7 @@
                     </div>
                     <div v-show="gameState === 'scores'" id="scoreBoard"></div>
                     <div v-show="gameState === 'playing'" id="userConsole" :class="{playerTurn: playerTurn}">
-                        <div v-for="color in playingColors" @click="onUserAttempt(color)" :id="allColors[color]" class="button" :style="{backgroundColor: allColors[color], color: allColors[color]}"></div>
+                        <div v-for="color in playingColors" @click="onUserAttempt(color)" :id="color" class="button" :style="{backgroundColor: allColors[color], color: allColors[color]}"></div>
                     </div>
                 </div>
             </div>
@@ -44,11 +44,6 @@
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <script type="text/javascript" src="simon.js"></script>
-
-
 </body>
-<loom-container id="lo-engage-ext-container">
-    <loom-shadow classname="resolved"></loom-shadow>
-</loom-container>
 
 </html>
