@@ -20,7 +20,7 @@ var game = new Vue ({
         showSimonColor: false,
         numColors: 8,
         uiColors: {play: null, scores: null, submit: null, back: null},
-        allColors: ["blue","lime","purple","gold","red","darkorange","magenta", "aqua"]
+        allColors: ["dodgerblue","lime","blueviolet","gold","red","darkorange","magenta", "aqua"]
     },
     
     async created() {
