@@ -1,34 +1,54 @@
 <!DOCTYPE html>
-
 <html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="styles.css" type="text/css" />
-    </head>
-    <body>
-        <div id="game">
-            <div v-if="loading"></div>
-            <div v-else>
-                <div v-if="gameState == 'menu'"></div>
-                <div v-if="gameState == 'playing'">
-                    <div id="scoreBoard"></div>
-                    <div id="simon_space">
-                        <div id="simon">
-                            <div id="simon_height"></div>
-                            <div id="screen" :class="{showColor: showSimonColor}" :style="{backgroundColor: simonColor, color: simonColor}"></div>
-                            <img src="images/738035_old-television-png.png" draggable="false">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Press+Start+2P&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css" type="text/css">
+</head>
+
+<body>
+    <div id="game" :class="gameState || 'loading'">
+        <div>
+            <div>
+                <div id="simon_space">
+                    <div id="simon">
+                        <div id="simon_height"></div>
+                        <div id="screen" :class="{showColor: showSimonColor}" :style="{backgroundColor: simonColor, color: simonColor}"></div>
+                        <img src="images/738035_old-television-png.png" draggable="false">
+                        <div id="screen_text" class="screen-vp">
+                            <div id="menu_screen" v-show="gameState === 'menu'">
+                                <div id="game_name">Clement Says</div>
+                            </div>
                         </div>
                     </div>
-                    <div id="userConsole">
-                        <div v-for="color in allColors.length" :id="allColors[color-1]" class="button" :style="{backgroundColor: allColors[color-1], color: allColors[color-1]}" @click="simonColor = allColors[color-1]; showSimonColor = true;"></div>
+                </div>
+                <div id="ui_main">
+                    <div v-show="gameState === 'menu'" id="menu">
+                        <div class="button" :style="{backgroundColor: uiColors.play, color: uiColors.play}">
+                            <div>Play</div>
+                        </div>
+                        <div class="button" :style="{backgroundColor: uiColors.scores, color: uiColors.scores}">
+                            <div>Highscores</div>
+                        </div>
+                    </div>
+                    <div v-show="gameState === 'scores'" id="scoreBoard"></div>
+                    <div v-show="gameState === 'playing'" id="userConsole" :class="{playerTurn: playerTurn}">
+                        <div v-for="color in playingColors" @click="onUserAttempt(color)" :id="allColors[color]" class="button" :style="{backgroundColor: allColors[color], color: allColors[color]}"></div>
                     </div>
                 </div>
-                <div v-if="gameState == 'scores'"></div>
             </div>
         </div>
-        
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-        <script type="text/javascript" src="simon.js"></script>
-    </body>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.0/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="simon.js"></script>
+
+
+</body>
+<loom-container id="lo-engage-ext-container">
+    <loom-shadow classname="resolved"></loom-shadow>
+</loom-container>
+
 </html>

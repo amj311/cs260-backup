@@ -1,12 +1,15 @@
 body {
     margin: 0;
+    font-family: 'Press Start 2P', monospace;
+    color: #eee;
+    line-height: 1.7;
 }
 
 #game {
     position: relative;
     height: 100vh;
     width: 100vw;
-    background: #555;
+    background: #333;
     overflow: hidden;
 }
 
@@ -27,6 +30,7 @@ div#simon {
     position: relative;
     width: 80%;
     max-width: 30em;
+    user-select: none;
 }
 
 div#screen {
@@ -39,9 +43,44 @@ div#screen {
     background-image: url(images/static_fizzle.gif);
 }
 
-#screen.showColor {
+.loading div#screen {
+    background-image: url(images/static_colors.gif);
+}
+
+.playing #screen.showColor {
     background-image: none;
     box-shadow: inset 0 0 50em, inset 100vw 0 #ffffffaa;
+}
+
+div#screen_text {
+    position: absolute;
+    top: 20%;
+    left: 15%;
+    width: 55%;
+    height: 50%;
+    overflow: hidden;
+}
+
+div#screen_text {
+    display: flex;
+}
+
+div#screen_text > div {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+div#menu_screen {
+    justify-content: center;
+    align-items: center;
+}
+
+div#game_name {
+    text-align: center;
+    max-width: min-content;
+    font-size: 1.7em;
+    opacity: .9;
 }
 
 div#simon_height {
@@ -55,11 +94,7 @@ div#simon_height {
     position: absolute;
 }
 
-div#userConsole {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-content: center;
+div#ui_main {
     transform: translateX(-50%) perspective(100vh) rotateX(30deg);
     transform-origin: bottom;
     position: absolute;
@@ -69,12 +104,18 @@ div#userConsole {
     max-width: 40em;
     height: 80%;
 }
-
+div#userConsole, #menu {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    height: 85%;
+    position: relative;
+}
 .button {
     flex-grow: 1;
     width: 40%;
     height: 20%;
-    margin: 3%;
     border: .2em solid;
     border-top-color: #ffffff66;
     border-left-color: #ffffff33;
@@ -82,6 +123,10 @@ div#userConsole {
     border-bottom-color: #00000066;
     outline: 1px solid #00000055;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
 }
 
 .button:hover {
@@ -91,4 +136,14 @@ div#userConsole {
 .button:active {
     border-width: .12em;
     box-shadow: inset 0 0 6em, inset 500vw 0 #ffffffaa, 0 0 1.5em -0.2em, 0 0 1em -0.2em #ffffffbb;
+}
+
+.button > div {
+    color: #fff;
+}
+
+#menu .button {
+    min-width: min-content;
+    font-size: 1.5em;
+    padding: 0.5em;
 }
